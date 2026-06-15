@@ -1,0 +1,13 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/.env
+
+# Node
+frontend/node_modules/
+
+# 測試圖片
+backend/test.jpg
+
+# System
+.DS_Store
