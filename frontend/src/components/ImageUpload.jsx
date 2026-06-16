@@ -15,15 +15,15 @@ export default function ImageUpload({ onImageSelect }) {
   }
 
   // 處理拖曳檔案
-  const ç = (e) => {
+  const handleDrop = (e) => {
     e.preventDefault()
     handleFile(e.dataTransfer.files[0])
   }
 
   return (
     <div
-      onDrop={handleDrop} // 滑鼠放開時觸發
-      onDragOver={(e) => e.preventDefault()}
+      onDrop={handleDrop} // 滑鼠放開時呼叫 handleDrop
+      onDragOver={(e) => e.preventDefault()} // 拖曳時防止預設行為
       onClick={() => inputRef.current.click()}
       className="border-2 border-dashed border-pink-300 rounded-2xl p-12 text-center cursor-pointer hover:bg-pink-50 transition"
     >
