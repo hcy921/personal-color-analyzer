@@ -27,25 +27,30 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex flex-col items-center justify-center p-8">
-      <h1 className="text-3xl font-light text-pink-400 tracking-widest mb-2">個人色彩分析</h1>
-      <p className="text-gray-400 text-sm mb-10">上傳照片或直接拍照，AI為你判斷專屬色季</p>
+    <div className="min-h-screen bg-cream-bg flex flex-col items-center justify-center p-8">
+      <div className="mb-12 text-center">
+        <p className="text-cream-text text-sm tracking-widest2 mb-4">PERSONAL COLOR ANALYSIS</p>
+        <h1 className="font-sans text-cream-dark font-bold text-4xl tracking-widest3 mb-4">個人色彩診斷</h1>
+        <div className="w-12 h-px bg-cream-border mx-auto my-4" />
+        <p className="text-cream-text text-sm tracking-wider">上傳照片，探索你的專屬色季</p>
+      </div>
 
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-xl">
           {/* 模式切換 */}
-          <div className="flex rounded-2xl border border-pink-200 overflow-hidden mb-6">
+          <div className="border border-cream-border flex mb-6">
             <button
               onClick={() => setMode('upload')}
-              className={`flex-1 py-2 text-sm tracking-widest transition ${mode === 'upload' ? 'bg-pink-400 text-white' : 'text-pink-300 hover:bg-pink-50'}`}
+              className={`flex-1 py-3 text-sm tracking-widest transition ${mode === 'upload' ? 'bg-cream-border text-cream-bg' : 'text-cream-text hover:bg-cream-hover'}`}
             >
               上傳照片
             </button>
+            <div className="w-px bg-cream-border" />
             <button
               onClick={() => setMode('camera')}
-              className={`flex-1 py-2 text-sm tracking-widest transition ${mode === 'camera' ? 'bg-pink-400 text-white' : 'text-pink-300 hover:bg-pink-50'}`}
+              className={`flex-1 py-3 text-sm tracking-widest transition ${mode === 'camera' ? 'bg-cream-border text-cream-bg' : 'text-cream-text hover:bg-cream-hover'}`}
             >
               相機拍照
             </button>
@@ -58,9 +63,9 @@ export default function HomePage() {
           )}
 
           {preview && (
-            <img src={preview} alt="預覽" className="mt-6 rounded-2xl w-full object-cover max-h-64" />
+            <img src={preview} alt="預覽" className="mt-6 w-full max-h-72 object-cover" />
           )}
-          {error && <p className="text-red-400 text-sm text-center mt-4">{error}</p>}
+          {error && <p className="text-xs text-center mt-4 text-cream-text">{error}</p>}
         </div>
       )}
     </div>

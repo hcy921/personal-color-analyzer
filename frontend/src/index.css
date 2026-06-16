@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@theme {
+    --color-cream-bg: #F7F4EF;
+    --color-cream-hover: #EDE8DF;
+    --color-cream-border: #C8B89A;
+    --color-cream-text: #A89880;
+    --color-cream-dark: #4A3F35;
+    --color-cream-muted: #C8B89A;
+    --font-family-serif: 'Noto Serif TC', serif;
+    --font-family-sans: 'Noto Sans TC', sans-serif;
+  }
