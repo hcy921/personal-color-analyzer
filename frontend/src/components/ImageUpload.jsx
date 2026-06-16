@@ -3,6 +3,7 @@ import { useRef } from 'react'
 export default function ImageUpload({ onImageSelect }) {
   const inputRef = useRef()
 
+  // 處理檔案
   const handleFile = (file) => {
     if (!file) return
     const reader = new FileReader()
@@ -13,14 +14,15 @@ export default function ImageUpload({ onImageSelect }) {
     reader.readAsDataURL(file)
   }
 
-  const handleDrop = (e) => {
+  // 處理拖曳檔案
+  const ç = (e) => {
     e.preventDefault()
     handleFile(e.dataTransfer.files[0])
   }
 
   return (
     <div
-      onDrop={handleDrop}
+      onDrop={handleDrop} // 滑鼠放開時觸發
       onDragOver={(e) => e.preventDefault()}
       onClick={() => inputRef.current.click()}
       className="border-2 border-dashed border-pink-300 rounded-2xl p-12 text-center cursor-pointer hover:bg-pink-50 transition"

@@ -1,28 +1,41 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useCallback } from 'react'
 
 export default function Camera({ onCapture }) {
-  const videoRef = useRef()
-  const canvasRef = useRef()
+  
   const [active, setActive] = useState(false)
+  const [stream, setStream] = useState(null)
+  
+  // 確認 stream 是否存在，如果存在則設置到 srcObject 上
+  // 避免 useRef 的非同步問題（元素尚未渲染就嘗試存取）
+  const videoRef = useCallback(node => {
+    if (node && stream) {
+      node.srcObject = stream
+    }
+  }, [stream])
+  const canvasRef = useRef()
 
+  // 開啟相機
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-      videoRef.current.srcObject = stream
+      const s = await navigator.mediaDevices.getUserMedia({ video: true })
+      setStream(s)
       setActive(true)
     } catch (e) {
       alert('無法開啟相機，請確認瀏覽器權限')
     }
   }
 
+  // 關閉相機
   const stopCamera = () => {
-    const stream = videoRef.current?.srcObject
     stream?.getTracks().forEach(track => track.stop())
+    setStream(null)
     setActive(false)
   }
 
+  // 拍照
   const capture = () => {
-    const video = videoRef.current
+    // 取得 video 元素
+    const video = document.querySelector('video')
     const canvas = canvasRef.current
     canvas.width = video.videoWidth
     canvas.height = video.videoHeight
@@ -32,8 +45,6 @@ export default function Camera({ onCapture }) {
     stopCamera()
     onCapture(base64, 'image/jpeg', dataUrl)
   }
-
-  useEffect(() => () => stopCamera(), [])
 
   return (
     <div className="flex flex-col items-center gap-4">
