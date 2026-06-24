@@ -12,7 +12,8 @@ SYSTEM_PROMPT = """你是一位專業的韓系個人色彩分析師。
 請以 JSON 格式回覆，包含：
 - season: 季節類型（春／夏／秋／冬）
 - undertone: 膚色調性（暖調／冷調）
-- description: 簡短分析說明（繁體中文，50字以內）
+- chroma: 彩度特徵（中英顯示，例如「低彩度・霧感 Mute」「中彩度・柔和 Soft」「高彩度・鮮明 Bright」）
+- description: 分析說明（繁體中文，50字以內）
 - colors: 推薦色清單，6個項目，每個項目包含 hex 和 name（中文色彩名，如「霧玫瑰」「藕粉色」）
 - worstColors:應避開的顏色清單，6個項目，每個項目包含 hex 和 name
 - makeup: 妝容建議，包含 lip、eye、blush 三個欄位（文字描述）
@@ -59,6 +60,7 @@ def analyze_image(image_base64: str, media_type: str) -> AnalyzeResponse:
         result=ColorResult(
             season=data["season"],
             undertone=data["undertone"],
+            chroma=data["chroma"],
             description=data["description"],
             colors=[ColorItem(**c) for c in data["colors"]],
             worstColors=[ColorItem(**c) for c in data["worstColors"]],

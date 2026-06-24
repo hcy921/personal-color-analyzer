@@ -12,6 +12,7 @@ class ColorItem(BaseModel):
 class ColorResult(BaseModel):
     season: str
     undertone: str
+    chroma: str
     description: str
     colors: list[ColorItem]
     worstColors: list[ColorItem]
