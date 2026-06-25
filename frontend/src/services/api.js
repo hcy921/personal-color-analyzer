@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000'
+const API_URL = 'https://personal-color-analyzer-pdxv.onrender.com'
 
 export async function analyzeImage(imageBase64, mediaType = 'image/jpeg') {
   const response = await fetch(`${API_URL}/analyze`, {
